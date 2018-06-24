@@ -14,7 +14,7 @@ Bot.on :message do |message|
         { type: 'postback', title: 'Yes', payload: 'HARMLESS' },
         { type: 'postback', title: 'No', payload: 'EXTERMINATE' }]}})
 
-  if postback.payload == 'EXTERMINATE'
+  if message.text.include? "No"
     message.reply(text: "Wesh maggl") 
   else
     message.reply(text: "Je t'aime aussi")
