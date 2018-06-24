@@ -4,9 +4,9 @@ include Facebook::Messenger
 Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
 
 
-Bot.on :message do |message|
-  message.reply(
-  attachment: {
+
+message.reply(
+attachment: {
     type: 'template',
     payload: {
       template_type: 'button',
@@ -18,7 +18,7 @@ Bot.on :message do |message|
     }
   }
 )
-end
+
 
 Bot.on :postback do |postback|
   postback.sender    # => { 'id' => '1008372609250235' }
