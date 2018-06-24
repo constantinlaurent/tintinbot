@@ -3,11 +3,20 @@ include Facebook::Messenger
 
 Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
 
-Bot.on :optin do |optin|
-  optin.sender    # => { 'id' => '1008372609250235' }
-  optin.recipient # => { 'id' => '2015573629214912' }
-  optin.sent_at   # => 2016-04-22 21:30:36 +0200
-  optin.ref       # => 'CONTACT_SKYNET'
+Bot.on :message do |message|
+  message.reply(
+  attachment: {
+    type: 'template',
+    payload: {
+      template_type: 'button',
+      text: 'Human, do you like me?',
+      buttons: [
+        { type: 'postback', title: 'Yes', payload: 'HARMLESS' },
+        { type: 'postback', title: 'No', payload: 'EXTERMINATE' }]}})
 
-  optin.reply(text: 'Ah, human!')
+  if postback.payload == 'EXTERMINATE'
+    message.reply(text: "Wesh maggl") 
+  else
+    message.reply(text: "Je t'aime aussi")
+  end
 end
