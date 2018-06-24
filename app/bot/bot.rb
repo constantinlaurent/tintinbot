@@ -15,6 +15,7 @@ Bot.on :message do |message|
         { type: 'postback', title: 'No', payload: 'EXTERMINATE' }]}})
 
   Bot.on :postback do |postback|
+    message.typing_on
     postback.sender    # => { 'id' => '1008372609250235' }
     postback.recipient # => { 'id' => '2015573629214912' }
     postback.sent_at   # => 2016-04-22 21:30:36 +0200
