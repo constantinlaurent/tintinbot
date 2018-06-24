@@ -3,39 +3,13 @@ include Facebook::Messenger
 
 Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
 
-Bot.on :get_started do |get_started|
-  { 
-  "get_started":{
-    "payload":"<GET_STARTED_PAYLOAD>"
-  }
-}
-end
-
-def message_answer
-  Bot.on :message do |message|
-    message.reply(
-    attachment: {
-      type: 'template',
-      payload: {
-        template_type: 'button',
-        text: 'Human, do you like me?',
-        buttons: [
-          { type: 'postback', title: 'Yes', payload: 'HARMLESS' },
-          { type: 'postback', title: 'No', payload: 'EXTERMINATE' }
-                  ]
-              }
-                  }
-   )
-    
-  end
-
-Bot.on :postback do |postback|
-      postback.sender    # => { 'id' => '1008372609250235' }
-      postback.recipient # => { 'id' => '2015573629214912' }
-      postback.sent_at   # => 2016-04-22 21:30:36 +0200
-      postback.payload   # => 'EXTERMINATE'
-
-      if postback.payload == 'EXTERMINATE'
-        puts "Human #{postback.recipient} marked for extermination"
-      end
+Bot.on :message do |message|
+    if message.text.include? "Bonjour"
+       message.reply(text: "Salut mon grand") 
+   elsif message.text.include? "Bonne nuit"
+        message.reply(text: "Allez bonne nuit toi") 
+    else
+        message.reply(text: 'Reponse par defaut')
     end
+  
+end
