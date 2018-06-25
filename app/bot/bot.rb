@@ -7,6 +7,15 @@ Facebook::Messenger::Profile.set({
   get_started: {
     payload: 'Start'
   },
+  greeting:[
+  {
+    "locale":"default",
+    "text":"Hello!"
+  }, {
+    "locale":"en_US",
+    "text":"Timeless apparel for the masses."
+  }
+],
   persistent_menu: [
     {
       locale: 'default',
