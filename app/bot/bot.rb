@@ -5,8 +5,7 @@ Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
 
 Facebook::Messenger::Profile.set({
   get_started: {
-    payload: 'Start',
-    title: 'Dire Bonjour'
+    payload: 'Start'
   },
   persistent_menu: [
     {
