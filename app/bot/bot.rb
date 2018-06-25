@@ -82,6 +82,9 @@ Bot.on :message do |message|
       message.reply(text: "Hey top, quoi de prévu en ce moment ?") 
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
+    elsif postback.payload == 'GET_STARTED_PAYLOAD'
+      message.typing_on
+      message.reply(text: "Salut je suis un Chatbot, allez commençons !")
     else
       message.typing_off
     end
