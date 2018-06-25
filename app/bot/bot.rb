@@ -54,7 +54,7 @@ Bot.on :postback do |postback|
   
     if postback.payload == 'Start'
       message.typing_on
-      message.reply(text: "Salut je suis un Chatbot, allez commençons !") 
+      message.reply(text: "Salut je suis une grosse merde, allez commençons !") 
     elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D") 
@@ -87,7 +87,7 @@ Bot.on :message do |message|
       message.reply(text: "Hey top, quoi de prévu en ce moment ?") 
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
-    elsif postback.payload == 'GET_STARTED_PAYLOAD'
+    elsif postback.payload == 'Start'
       message.typing_on
       message.reply(text: "Salut je suis un Chatbot, allez commençons !")
     else
