@@ -44,7 +44,19 @@ Bot.on :postback do |postback|
   
     if postback.payload == 'GET_STARTED_PAYLOAD'
       message.typing_on
-      message(text: "Salut je suis un Chatbot, allez commençons !") 
+      message.reply(
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'button',
+            text: 'Human, do you like me?',
+            buttons: [
+              { type: 'postback', title: 'Yes', payload: 'HARMLESS' },
+              { type: 'postback', title: 'No', payload: 'EXTERMINATE' }
+      ]
+    }
+  }
+) 
     elsif postback.payload == 'WHAT'
       message.typing_on
       message(text: "Un chatbot est un robot qui te parle :D") 
