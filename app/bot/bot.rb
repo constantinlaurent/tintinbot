@@ -34,5 +34,6 @@ Bot.on :postback do |postback|
       elsif postback.payload == 'HARMLESS'
         message.reply(text: "Moi aussi je t'aime") 
       end
+    end
   end
 end
