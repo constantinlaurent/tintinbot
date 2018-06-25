@@ -17,6 +17,11 @@ Facebook::Messenger::Profile.set({
           type: 'nested',
           call_to_actions: [
             {
+              title: 'Démarrer',
+              type: 'postback',
+              payload: 'GET_STARTED_PAYLOAD'
+            },
+            {
               title: 'What is a chatbot?',
               type: 'postback',
               payload: 'WHAT'
@@ -44,19 +49,7 @@ Bot.on :postback do |postback|
   
     if postback.payload == 'GET_STARTED_PAYLOAD'
       message.typing_on
-      message.reply(
-        attachment: {
-          type: 'template',
-          payload: {
-            template_type: 'button',
-            text: 'Human, do you like me?',
-            buttons: [
-              { type: 'postback', title: 'Yes', payload: 'HARMLESS' },
-              { type: 'postback', title: 'No', payload: 'EXTERMINATE' }
-      ]
-    }
-  }
-) 
+      message(text: "Salut je suis un Chatbot, allez commençons !") 
     elsif postback.payload == 'WHAT'
       message.typing_on
       message(text: "Un chatbot est un robot qui te parle :D") 
