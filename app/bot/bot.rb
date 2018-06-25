@@ -7,7 +7,48 @@ Facebook::Messenger::Profile.set({
   get_started: {
     payload: 'GET_STARTED_PAYLOAD'
   }
-}, access_token: ENV['ACCESS_TOKEN'])
+}, access_token: ENV['ACCESS_TOKEN']
+  persistent_menu: [
+    {
+      locale: 'default',
+      composer_input_disabled: true,
+      call_to_actions: [
+        {
+          title: 'My Account',
+          type: 'nested',
+          call_to_actions: [
+            {
+              title: 'What is a chatbot?',
+              type: 'postback',
+              payload: 'EXTERMINATE'
+            },
+            {
+              title: 'History',
+              type: 'postback',
+              payload: 'HISTORY_PAYLOAD'
+            },
+            {
+              title: 'Contact Info',
+              type: 'postback',
+              payload: 'CONTACT_INFO_PAYLOAD'
+            }
+          ]
+        },
+        {
+          type: 'web_url',
+          title: 'Get some help',
+          url: 'https://github.com/hyperoslo/facebook-messenger',
+          webview_height_ratio: 'full'
+        }
+      ]
+    },
+    {
+      locale: 'zh_CN',
+      composer_input_disabled: false
+    }
+  ]
+)
+  
 
 Bot.on :message do |message|
   message.reply(
