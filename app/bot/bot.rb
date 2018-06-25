@@ -49,7 +49,6 @@ Facebook::Messenger::Profile.set({
   
 }, access_token: ENV['ACCESS_TOKEN'])
 
-message.reply(text: "Salut") 
 
 Bot.on :postback do |postback|
     message.typing_on
