@@ -40,12 +40,12 @@ Facebook::Messenger::Profile.set({
   
 }, access_token: ENV['ACCESS_TOKEN'])
   
-Bot.on :message do |message|
+Bot.on :postback do |postback|
     message.typing_on
     postback.sender    # => { 'id' => '1008372609250235' }
     postback.recipient # => { 'id' => '2015573629214912' }
     postback.sent_at   # => 2016-04-22 21:30:36 +0200
-    postback.payload   # => 'EXTERMINATE'
+    postback.payload   # => 'GET_STARTED_PAYLOAD'
   
     if postback.payload == 'GET_STARTED_PAYLOAD'
       message.typing_on
@@ -75,7 +75,7 @@ Bot.on :message do |message|
     postback.sender    # => { 'id' => '1008372609250235' }
     postback.recipient # => { 'id' => '2015573629214912' }
     postback.sent_at   # => 2016-04-22 21:30:36 +0200
-    postback.payload   # => 'EXTERMINATE'
+    postback.payload   # => 'GET_STARTED_PAYLOAD'
   
     if postback.payload == 'GOOD_MOOD'
       puts "Human #{postback.recipient} marked for extermination"
