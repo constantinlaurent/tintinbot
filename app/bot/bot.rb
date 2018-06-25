@@ -40,7 +40,7 @@ Facebook::Messenger::Profile.set({
   
 }, access_token: ENV['ACCESS_TOKEN'])
   
-Bot.on :postback do |postback|
+Bot.on :message do |message|
     message.typing_on
     postback.sender    # => { 'id' => '1008372609250235' }
     postback.recipient # => { 'id' => '2015573629214912' }
@@ -53,6 +53,8 @@ Bot.on :postback do |postback|
     elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D") 
+    else
+      message.typing_off
     end
 end
 
@@ -79,7 +81,7 @@ Bot.on :message do |message|
       puts "Human #{postback.recipient} marked for extermination"
       message.reply(text: "Hey top, quoi de prévu en ce moment ?") 
     elsif postback.payload == 'BAD_MOOD'
-      message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller") 
+      message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
     else
       message.typing_off
     end
