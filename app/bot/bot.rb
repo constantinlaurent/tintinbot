@@ -10,7 +10,7 @@ Facebook::Messenger::Profile.set({
   persistent_menu: [
     {
       locale: 'default',
-      composer_input_disabled: true,
+      composer_input_disabled: false,
       call_to_actions: [
         {
           title: 'My Account',
@@ -20,31 +20,17 @@ Facebook::Messenger::Profile.set({
               title: 'What is a chatbot?',
               type: 'postback',
               payload: 'EXTERMINATE'
-            },
-            {
-              title: 'History',
-              type: 'postback',
-              payload: 'HISTORY_PAYLOAD'
-            },
-            {
-              title: 'Contact Info',
-              type: 'postback',
-              payload: 'CONTACT_INFO_PAYLOAD'
             }
           ]
         },
         {
           type: 'web_url',
           title: 'Get some help',
-          url: 'https://github.com/hyperoslo/facebook-messenger',
+          url: 'http://www.google.com',
           webview_height_ratio: 'full'
         }
       ]
     },
-    {
-      locale: 'zh_CN',
-      composer_input_disabled: false
-    }
   ]
   
 }, access_token: ENV['ACCESS_TOKEN'])
