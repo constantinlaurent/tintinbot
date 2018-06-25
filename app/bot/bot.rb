@@ -49,13 +49,13 @@ Facebook::Messenger::Profile.set({
   
 }, access_token: ENV['ACCESS_TOKEN'])
   
-Bot.on :playload do |playload|
+Bot.on :postback do |postback|
     message.typing_on
   
-    if payload == 'Start'
+    if postback.payload == 'Start'
       message.typing_on
       message.reply(text: "Salut je suis un Chatbot, allez commençons !") 
-    elsif playload == 'WHAT'
+    elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D") 
     else
