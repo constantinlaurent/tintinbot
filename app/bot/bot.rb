@@ -5,7 +5,7 @@ Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
 
 Facebook::Messenger::Profile.set({
   get_started: {
-    payload: 'Start'
+    payload: 'GET_STARTED_PAYLOAD'
   },
   greeting:[
   {
@@ -48,13 +48,14 @@ Facebook::Messenger::Profile.set({
   ]
   
 }, access_token: ENV['ACCESS_TOKEN'])
-  
+
+message.reply(text: "Salut") 
+
 Bot.on :postback do |postback|
     message.typing_on
-  
-    if postback.payload == 'Start'
+    if postback.payload == 'GET_STARTED_PAYLOAD'
       message.typing_on
-      message.reply(text: "Salut je suis une grosse merde, allez commençons !") 
+      message.reply(text: "Salut je suis un Chatbot, allez commençons !") 
     elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D") 
@@ -87,7 +88,7 @@ Bot.on :message do |message|
       message.reply(text: "Hey top, quoi de prévu en ce moment ?") 
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
-    elsif postback.payload == 'Start'
+    elsif postback.payload == 'GET_STARTED_PAYLOAD'
       message.typing_on
       message.reply(text: "Salut je suis un Chatbot, allez commençons !")
     else
