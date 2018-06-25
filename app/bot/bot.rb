@@ -43,9 +43,11 @@ Bot.on :postback do |postback|
     postback.payload   # => 'EXTERMINATE'
   
     if postback.payload == 'GET_STARTED_PAYLOAD'
-      message.reply(text: "Salut je suis un Chatbot, allez commençons !") 
+      message.typing_on
+      message(text: "Salut je suis un Chatbot, allez commençons !") 
     elsif postback.payload == 'WHAT'
-      message.reply(text: "Un chatbot est un robot qui te parle :D") 
+      message.typing_on
+      message(text: "Un chatbot est un robot qui te parle :D") 
     end
 end
 
@@ -68,11 +70,13 @@ Bot.on :message do |message|
     postback.sent_at   # => 2016-04-22 21:30:36 +0200
     postback.payload   # => 'EXTERMINATE'
   
-    if postback.payload == 'GOOD_MODD'
+    if postback.payload == 'GOOD_MOOD'
       puts "Human #{postback.recipient} marked for extermination"
       message.reply(text: "Hey top, quoi de prévu en ce moment ?") 
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller") 
+    else
+      message.typing_off
     end
   end
 end
