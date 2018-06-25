@@ -56,10 +56,10 @@ Bot.on :message do |message|
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Human, do you like me?',
+      text: 'Comment vas-tu ?',
       buttons: [
-        { type: 'postback', title: 'Yes', payload: 'HARMLESS' },
-        { type: 'postback', title: 'No', payload: 'EXTERMINATE' }]}})
+        { type: 'postback', title: 'Bien', payload: 'GOOD_MOOD' },
+        { type: 'postback', title: 'Pas top', payload: 'BAD_MOOD' }]}})
 
   Bot.on :postback do |postback|
     message.typing_on
@@ -68,11 +68,11 @@ Bot.on :message do |message|
     postback.sent_at   # => 2016-04-22 21:30:36 +0200
     postback.payload   # => 'EXTERMINATE'
   
-    if postback.payload == 'EXTERMINATE'
+    if postback.payload == 'GOOD_MODD'
       puts "Human #{postback.recipient} marked for extermination"
-      message.reply(text: "Fais gaffe à toi !") 
-    elsif postback.payload == 'HARMLESS'
-      message.reply(text: "Moi aussi je t'aime") 
+      message.reply(text: "Hey top, quoi de prévu en ce moment ?") 
+    elsif postback.payload == 'BAD_MOOD'
+      message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller") 
     end
   end
 end
