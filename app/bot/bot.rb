@@ -86,6 +86,37 @@ Bot.on :message do |message|
         "content_type":"location" }]})
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
+      message.reply ({
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"Welcome!",
+            "image_url":"https://petersfancybrownhats.com/company_image.png",
+            "subtitle":"We have the right hat for everyone.",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://petersfancybrownhats.com/view?item=103",
+              "webview_height_ratio": "tall",
+            },
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://petersfancybrownhats.com",
+                "title":"View Website"
+              },{
+                "type":"postback",
+                "title":"Start Chatting",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD"
+              }              
+            ]      
+          }
+        ]
+      }
+    }
+  })
     elsif postback.payload == 'GET_STARTED_PAYLOAD'
       message.typing_on
       message.reply(text: "Salut je suis un Chatbot, allez commençons !")
