@@ -42,7 +42,29 @@ Facebook::Messenger::Profile.set({
           title: 'Get some help',
           url: 'http://www.google.com',
           webview_height_ratio: 'full'
+        },
+        {
+          title: 'My Account',
+          type: 'nested',
+          call_to_actions: [
+            {
+          type: 'postback',
+          title: 'Coordinates lookup',
+          payload: 'COORDINATES'
+        },
+        {
+          type: 'postback',
+          title: 'Postal address lookup',
+          payload: 'FULL_ADDRESS'
+        },
+        {
+          type: 'postback',
+          title: 'Location lookup',
+          payload: 'LOCATION'
         }
+          ]
+        }
+            
       ]
     },
   ]
@@ -83,7 +105,8 @@ Bot.on :message do |message|
         "image_url":"http://www.stickpng.com/assets/images/58afdad6829958a978a4a693.png"
       },
       {
-        "content_type":"location" }]})
+        "content_type":"location",
+        "payload":"LOCATION"}]})
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
       message.reply ({
@@ -123,8 +146,43 @@ Bot.on :message do |message|
     elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D")
+    elsif postback.payload == 'LOCATION'
+      message.reply(text :"Hey tu es à <USER_LOC>")
     else
       message.typing_off
     end
   end
+end
+
+def lookup_location(sender_id)
+  say(sender_id, 'Let me know your location:', TYPE_LOCATION)
+  Bot.on :message do |message|
+    if message_contains_location?(message)
+      handle_user_location(message)
+    else
+      message.reply(text: "Please try your request again and use 'Send location' button")
+    end
+    wait_for_any_input
+  end
+end
+
+def message_contains_location?(message)
+  if attachments = message.attachments
+    attachments.first['type'] == 'location'
+  else
+    false
+  end
+end
+
+
+def handle_user_location(message)
+  coords = message.attachments.first['payload']['coordinates']
+  lat = coords['lat']
+  long = coords['long']
+  message.type
+  # make sure there is no space between lat and lng
+  parsed = get_parsed_response(REVERSE_API_URL, "#{lat},#{long}")
+  address = extract_full_address(parsed)
+  message.reply(text: "Coordinates of your location: Latitude #{lat}, Longitude #{long}. Looks like you're at #{address}")
+  wait_for_any_input
 end
