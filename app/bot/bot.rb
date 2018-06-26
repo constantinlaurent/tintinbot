@@ -83,7 +83,7 @@ Bot.on :message do |message|
         "image_url":"http://www.stickpng.com/assets/images/58afdad6829958a978a4a693.png"
       },
       {
-        "content_type":"location" }]})
+        "content_type":"location", }]})
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
       message.reply ({
@@ -123,7 +123,7 @@ Bot.on :message do |message|
     elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D")
-    elsif payload.coordinates.lat > 1
+    elsif lat.exist?
       message.reply ("OK")
     else
       message.typing_off
