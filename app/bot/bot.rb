@@ -106,7 +106,7 @@ Bot.on :message do |message|
       },
       {
         "content_type":"location",
-        "payload":"LOCATION"}]})
+        "payload":"LOC"}]})
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
       message.reply ({
@@ -146,8 +146,10 @@ Bot.on :message do |message|
     elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D")
-    elsif postback.payload == 'LOCATION'
-      message.reply(text :"Hey tu es à <USER_LOC>")
+    elsif postback.payload == 'LOC'
+      message.reply(text :"Hey tu es à ")
+    elsif postback.playload == '<POSTBACK_PAYLOAD>'
+      message.reply(text:"J'ai : <POSTBACK_PAYLOAD>")
     else
       message.typing_off
     end
