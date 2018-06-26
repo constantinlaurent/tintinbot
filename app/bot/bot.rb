@@ -154,6 +154,22 @@ Bot.on :message do |message|
   end
 end
 
+Bot.on :postback do |postback|
+  sender_id = postback.sender['id']
+  case postback.payload
+  when 'START' then show_replies_menu(postback.sender['id'], MENU_REPLIES)
+  when 'COORDINATES'
+    say(sender_id, IDIOMS[:ask_location], TYPE_LOCATION)
+    show_coordinates(sender_id)
+  when 'FULL_ADDRESS'
+    say(sender_id, IDIOMS[:ask_location], TYPE_LOCATION)
+    show_full_address(sender_id)
+  when 'LOCATION'
+    lookup_location(sender_id)
+  end
+end
+
+
 def lookup_location(sender_id)
   say(sender_id, 'Let me know your location:', TYPE_LOCATION)
   Bot.on :message do |message|
@@ -186,3 +202,4 @@ def handle_user_location(message)
   message.reply(text: "Coordinates of your location: Latitude #{lat}, Longitude #{long}. Looks like you're at #{address}")
   wait_for_any_input
 end
+
