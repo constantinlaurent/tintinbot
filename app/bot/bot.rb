@@ -50,18 +50,6 @@ Facebook::Messenger::Profile.set({
 }, access_token: ENV['ACCESS_TOKEN'])
 
 
-Bot.on :postback do |postback|
-    message.typing_on
-    if postback.payload == 'GET_STARTED_PAYLOAD'
-      message.typing_on
-      message.reply(text: "Salut je suis un Chatbot, allez commençons !") 
-    elsif postback.payload == 'WHAT'
-      message.typing_on
-      message.reply(text: "Un chatbot est un robot qui te parle :D") 
-    else
-      message.typing_off
-    end
-end
 
 
 Bot.on :message do |message|
@@ -85,11 +73,25 @@ Bot.on :message do |message|
     if postback.payload == 'GOOD_MOOD'
       puts "Human #{postback.recipient} marked for extermination"
       message.reply(text: "Hey top, quoi de prévu en ce moment ?") 
+      message.reply({
+    "text": "Here is a quick reply!",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"Search",
+        "payload":"<POSTBACK_PAYLOAD>",
+        "image_url":"http://www.stickpng.com/assets/images/58afdad6829958a978a4a693.png"
+      },
+      {
+        "content_type":"location" }]})
     elsif postback.payload == 'BAD_MOOD'
       message.reply(text: "Hey, ne t'inquiete pas ! Tout va bien aller")
     elsif postback.payload == 'GET_STARTED_PAYLOAD'
       message.typing_on
       message.reply(text: "Salut je suis un Chatbot, allez commençons !")
+    elsif postback.payload == 'WHAT'
+      message.typing_on
+      message.reply(text: "Un chatbot est un robot qui te parle :D")
     else
       message.typing_off
     end
