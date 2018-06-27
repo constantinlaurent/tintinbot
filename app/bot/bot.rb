@@ -1,6 +1,4 @@
 require 'facebook/messenger'
-require 'whenever'
-require 'chronic'
 include Facebook::Messenger
 
 Facebook::Messenger::Subscriptions.subscribe(access_token: ENV["ACCESS_TOKEN"])
