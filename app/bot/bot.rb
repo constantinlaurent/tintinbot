@@ -52,6 +52,21 @@ Facebook::Messenger::Profile.set({
 }, access_token: ENV['ACCESS_TOKEN'])
 
 
+Bot.on :postback do |postback|
+    message.typing_on
+    postback.sender    # => { 'id' => '1008372609250235' }
+    postback.recipient # => { 'id' => '2015573629214912' }
+    postback.sent_at   # => 2016-04-22 21:30:36 +0200
+    postback.payload   # => 'GET_STARTED_PAYLOAD'
+  
+    if postback.payload == 'GET_STARTED_PAYLOAD'
+      message.typing_on
+      message.reply(text: "Salut je suis un Chatbot, allez commençons !")
+    elsif postback.payload == 'WHAT'
+      message.typing_on
+      message.reply(text: "Un chatbot est un robot qui te parle :D")
+    end
+end
 
 Bot.on :message do |message|
   message.reply(
@@ -124,13 +139,6 @@ Bot.on :message do |message|
     elsif postback.payload == 'WHAT'
       message.typing_on
       message.reply(text: "Un chatbot est un robot qui te parle :D")
-      every :hour do 
-        message.reply(text: "Go")
-        {payload: 'Stop'}
-      end
-    elsif postback.payload == 'Stop'
-      message.typing_on
-      message.reply(text: "Allez on arrete")
     end
   end
 end
